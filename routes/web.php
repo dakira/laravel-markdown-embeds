@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\OrderShipped;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $mailable = new OrderShipped;
+    Mail::to('example@example.com')
+        ->send($mailable);
+
+    return $mailable;
 });
